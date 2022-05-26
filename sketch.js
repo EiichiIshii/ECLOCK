@@ -53,7 +53,7 @@ function draw() {
     textSize(ts / 2.1);
     text(today.getFullYear() + " / " + (today.getMonth() + 1) + " / " + today.getDate() + " [ " + nday + " ] ", 0, -ts / 2);
     textSize(ts);
-    text(today.getHours() + " : " + today.getMinutes() + " : " + ('0' + today.getSeconds()).slice(-2), 0, ts / 6);
+    text(today.getHours() + " : " + ('0' + today.getMinutes()).slice(-2) + " : " + ('0' + today.getSeconds()).slice(-2), 0, ts / 6);
 
     stroke(fc);
     strokeWeight(ts / 60);
@@ -62,7 +62,7 @@ function draw() {
 
     stroke(fc);
     noFill();
-    logo(width / 2, height - lr * 4, lr);
+    logo(width / 2, height - lr * 3, lr);
 
 }
 
