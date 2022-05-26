@@ -1,4 +1,4 @@
-let sw, bc, fc, myfont, ts, w, lr;
+let sw, bc, fc, myfont, ts, w, lr, hue;
 let nday = "";
 
 function preload() {
@@ -7,35 +7,47 @@ function preload() {
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
+    colorMode(HSB, 360, 100, 100, 100);
     textFont(myfont);
     textAlign(CENTER, CENTER);
     sw = 0;
-    bc = color(0);
-    fc = color(255);
+    bc = color(0, 0, 0);
+    fc = color(0, 0, 100);
     w = min(windowWidth, windowHeight);
     ts = w / 2.5;
-    lr = ts/6;
+    lr = ts / 8;
+    hue = random(360);
 }
 
 function draw() {
     background(bc);
-    if (sw > 1) {
+    if (sw > 2) {
         sw = 0;
     }
     if (sw == 0) {
-        bc = color(0);
-        fc = color(255);
+        bc = color(0, 0, 0);
+        fc = color(0, 0, 100);
     }
     if (sw == 1) {
-        bc = color(255);
-        fc = color(0);
+        bc = color(0, 0, 100);
+        fc = color(0, 0, 0);
+    }
+    if (sw == 2) {
+        bc = color(hue, 100, 60);
+        fc = color(0, 0, 100);
+    }
+
+    hue += 0.1;
+
+    if (hue > 360) {
+        hue = 0;
     }
 
     let today = new Date();
     nday = cvDay(today.getDay());
 
     push();
-    translate(width / 2, height / 2);
+    translate(width / 2, height / 2 - ts / 8);
     fill(fc);
     noStroke();
     textSize(ts / 2.1);
@@ -50,7 +62,7 @@ function draw() {
 
     stroke(fc);
     noFill();
-    logo(lr*2, height-lr*2, lr);
+    logo(width / 2, height - lr * 4, lr);
 
 }
 
@@ -122,6 +134,6 @@ function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
     w = min(windowWidth, windowHeight);
     ts = w / 2.5;
-    lr = ts/6;
+    lr = ts / 6;
     redraw();
 }
